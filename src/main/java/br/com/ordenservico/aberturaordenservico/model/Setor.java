@@ -7,28 +7,33 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 
-@Entity 
- @Table (name = "setor")
-    
+
+
+import jakarta.validation.constraints.NotBlank;
+
+@Entity
+@Table(name = "setores")
 public class Setor {
-    @Id 
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id ;
+    private Integer id;
 
+    @NotBlank(message = "O nome do setor é obrigatório")
     private String nomeSetor;
-    //@NotBlank (message = "O setor não pode ser vazio")
 
-    public Integer getId(){
+    public Setor() {
+    }
+
+    public Integer getId() {
         return id;
     }
-    public String getNomeSetor(){
+
+    public String getNomeSetor() {
         return nomeSetor;
     }
-    public void setNomeSetor(String nomeSetor){
+
+    public void setNomeSetor(String nomeSetor) {
         this.nomeSetor = nomeSetor;
     }
-
-
-
-    
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import br.com.ordenservico.aberturaordenservico.model.Equipamentos;
 import br.com.ordenservico.aberturaordenservico.service.EquipamentosService;
+import jakarta.validation.Valid;
 
 
 
@@ -77,7 +78,7 @@ public class EquipamentoController {
 
     @PostMapping
     public ResponseEntity<Equipamentos> cadastrarEquipamentos(
-             @RequestBody Equipamentos equipamentos) {
+            @Valid  @RequestBody Equipamentos equipamentos) {
 
         Equipamentos equipamentoCadastrado =
                 equipamentosService.cadastrarEquipamentos(equipamentos);
