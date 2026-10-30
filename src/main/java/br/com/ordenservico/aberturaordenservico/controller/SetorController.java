@@ -1,7 +1,7 @@
 package br.com.ordenservico.aberturaordenservico.controller;
 
 import java.util.List;
-import java.util.Optional;
+
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ordenservico.aberturaordenservico.model.Setor;
 import br.com.ordenservico.aberturaordenservico.service.SetorService;
-import jakarta.validation.Valid;
+
 
 @RestController 
 @RequestMapping ("/setores")
@@ -39,14 +39,23 @@ public class SetorController {
 
     }
     @PutMapping("/{id}")
-    public ResponseEntity<Setor> atualizar(@PathVariable Integer id, @RequestBody Setor novosDados) {
-        final Optional<Setor> setorAtualizado = 
-        setorService.atualizarSetor(id, novosDados);
-        if (setorAtualizado.isPresent()) {
-            return ResponseEntity.ok(setorAtualizado.get());
-        }
-        return ResponseEntity.notFound().build();
+public ResponseEntity<Setor> atualizar(
+        @PathVariable Integer id,
+        @RequestBody Setor novosDados) {
+
+    if (novosDados.getNomeSetor() == null ||
+            novosDados.getNomeSetor().isBlank()) {
+
+        return ResponseEntity.badRequest().build();
     }
+
+    return setorService.atualizarSetor(id, novosDados)
+            .map(ResponseEntity::ok)
+            .orElseGet(() -> ResponseEntity.notFound().build());
+}
+        
+        
+    
     @GetMapping("/{id}")
     public ResponseEntity<Setor> buscarSetorPorId(@PathVariable Integer id) {
         Setor setor = setorService.buscarSetorPorId(id);
@@ -62,7 +71,7 @@ public class SetorController {
         return ResponseEntity.ok(setores);
     }
     @PostMapping
-    public ResponseEntity<Setor> cadastrarSetor(@Valid @RequestBody Setor setor) {
+    public ResponseEntity<Setor> cadastrarSetor( @RequestBody Setor setor) {
         Setor setorCadastrado = setorService.cadastrarSetor(setor);
         return ResponseEntity
                 .status(HttpStatus.CREATED)

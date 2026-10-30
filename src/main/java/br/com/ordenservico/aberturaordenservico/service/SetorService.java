@@ -3,9 +3,11 @@ package br.com.ordenservico.aberturaordenservico.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import br.com.ordenservico.aberturaordenservico.model.Setor;
 import br.com.ordenservico.aberturaordenservico.repository.SetorRepository;
-
+@Service 
 public class SetorService {
     private final SetorRepository setorRepository;
      

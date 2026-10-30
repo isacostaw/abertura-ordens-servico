@@ -5,7 +5,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 
 
 @Entity 
@@ -17,9 +16,9 @@ public class Setor {
     private Integer id ;
 
     private String nomeSetor;
-    @NotBlank (message = "O setor não pode ser vazio")
+    //@NotBlank (message = "O setor não pode ser vazio")
 
-    public int getId(){
+    public Integer getId(){
         return id;
     }
     public String getNomeSetor(){
