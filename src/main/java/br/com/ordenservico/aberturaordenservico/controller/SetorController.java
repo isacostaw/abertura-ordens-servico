@@ -27,7 +27,7 @@ public class SetorController {
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar
-    (@PathVariable Integer id) {
+    (@Valid @PathVariable Integer id) {
         
         boolean deletado = setorService.deletarSetor(id);
         if (deletado) {
@@ -39,7 +39,7 @@ public class SetorController {
     }
     @PutMapping("/{id}")
 public ResponseEntity<Setor> atualizar(
-        @PathVariable Integer id,
+       @Valid  @PathVariable Integer id,
         @RequestBody Setor novosDados) {
 
     if (novosDados.getNomeSetor() == null ||

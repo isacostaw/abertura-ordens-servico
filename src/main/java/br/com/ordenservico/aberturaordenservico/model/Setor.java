@@ -24,6 +24,9 @@ public class Setor {
 
     public Setor() {
     }
+    public Setor(String nomeSetor) {
+        this.nomeSetor = nomeSetor;
+    }
 
     public Integer getId() {
         return id;

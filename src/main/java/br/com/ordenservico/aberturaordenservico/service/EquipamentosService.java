@@ -72,7 +72,11 @@ public class EquipamentosService {
         if (equipamentoExistente.isPresent()) {
 
             if (novosDados.getSetor() == null ||
-                    novosDados.getSetor().getId() == null) {
+                    novosDados.getSetor().getId() == null
+                || novosDados.getNomeEquipamento() == null ||
+                    novosDados.getNomeEquipamento().isBlank() ||
+                    novosDados.getNumeroPatrimonio() == null ||
+                    novosDados.getNumeroPatrimonio().isBlank()) {
 
                 throw new ResponseStatusException(
                         HttpStatus.BAD_REQUEST,

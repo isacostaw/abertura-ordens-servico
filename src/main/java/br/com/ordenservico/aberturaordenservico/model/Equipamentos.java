@@ -24,12 +24,18 @@ public class Equipamentos {
     @NotBlank(message = "O número de patrimônio é obrigatório")
     private String numeroPatrimonio;
 
-    @NotNull(message = "O setor do equipamento é obrigatório")
+    
     @ManyToOne
-    @JoinColumn(name = "setor_id")
+    @JoinColumn(name = "setor_id", nullable = false)
+    @NotNull(message = "O setor do equipamento é obrigatório")
     private Setor setor;
 
     public Equipamentos() {
+    }
+    public Equipamentos(String nomeEquipamento, String numeroPatrimonio, Setor setor) {
+        this.nomeEquipamento = nomeEquipamento;
+        this.numeroPatrimonio = numeroPatrimonio;
+        this.setor = setor;
     }
 
     public Integer getId() {
