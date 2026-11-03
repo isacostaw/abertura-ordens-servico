@@ -1,9 +1,8 @@
 package br.com.ordenservico.aberturaordenservico.controller;
 
 import java.util.List;
+import jakarta.validation.Valid;
 
-
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +27,7 @@ public class SetorController {
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar
-    (@PathVariable Integer id) {
+    (@Valid @PathVariable Integer id) {
         
         boolean deletado = setorService.deletarSetor(id);
         if (deletado) {
@@ -40,7 +39,7 @@ public class SetorController {
     }
     @PutMapping("/{id}")
 public ResponseEntity<Setor> atualizar(
-        @PathVariable Integer id,
+       @Valid  @PathVariable Integer id,
         @RequestBody Setor novosDados) {
 
     if (novosDados.getNomeSetor() == null ||
@@ -70,13 +69,13 @@ public ResponseEntity<Setor> atualizar(
         List<Setor> setores = setorService.listarSetores();
         return ResponseEntity.ok(setores);
     }
+    
     @PostMapping
-    public ResponseEntity<Setor> cadastrarSetor( @RequestBody Setor setor) {
-        Setor setorCadastrado = setorService.cadastrarSetor(setor);
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(setorCadastrado);
-    }
+public ResponseEntity<Setor> cadastrarSetor(
+        @Valid @RequestBody Setor setor) {
+
+    return ResponseEntity.ok(setorService.cadastrarSetor(setor));
+}
     
 
 
